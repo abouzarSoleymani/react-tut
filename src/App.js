@@ -1,5 +1,9 @@
 import './App.css';
 import { useForm } from 'react-hook-form';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
 
 function App() {
   const defaultValues = {
@@ -15,25 +19,62 @@ function App() {
     alert(JSON.stringify(data));
   };
   return (
-    <div className="App">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="firstname">
-          firstName:
-          <input defaultValue={defaultValues.firstName} id="firstname" {...register('firstName')} />
-        </label>
-        <label htmlFor="lastname">
-          lastname:
-          <input defaultValue={defaultValues.lastName} id="lastname" {...register('lastName', { required: 'this is required', minLength: { value: 10, message: 'must 10' } })} />
-        </label>
-        {errors.lastName && errors.lastName.message}
-        <label htmlFor="age">
-          age:
-          <input id="age" {...register('age', { required: 'this is required', pattern: { value: /\d+/, message: 'pattren' } })} />
-        </label>
-        {errors.age && errors.age.message}
-        <input type="submit" />
-      </form>
-    </div>
+    <Box
+      sx={{
+        mt: 10,
+        '& .MuiTextField-root': { m: 1, width: '50ch' },
+      }}
+      component="form"
+      noValidate
+      onSubmit={handleSubmit(onSubmit)}
+      autoComplete="off"
+    >
+      <Grid
+        container
+        alignItems="center"
+        justify="center"
+        direction="column"
+      >
+        <Grid item>
+          <TextField
+            id="outlined-multiline-flexible"
+            label="firstName"
+            fullWidth
+            multiline
+            maxRows={4}
+            defaultValue={defaultValues.firstName}
+            {...register('firstName')}
+          />
+        </Grid>
+        <Grid item>
+          <TextField
+            id="outlined-multiline-flexible"
+            label="lastName"
+            multiline
+            maxRows={4}
+            defaultValue={defaultValues.lastName}
+            {...register('lastName', { required: 'this is required', minLength: { value: 10, message: 'must 10' } })}
+          />
+        </Grid>
+        <Grid item align="center">
+          {errors.lastName && errors.lastName.message}
+        </Grid>
+        <Grid item>
+          <TextField
+            id="outlined-multiline-flexible"
+            label="age"
+            multiline
+            maxRows={4}
+            defaultValue={defaultValues.age}
+            {...register('age', { required: 'this is required', pattern: { value: /\d+/, message: 'pattren' } })}
+          />
+        </Grid>
+        <Grid item align="center" marginBottom={4}>
+          {errors.age && errors.age.message}
+        </Grid>
+        <Button type="submit" variant="contained">submit</Button>
+      </Grid>
+    </Box>
   );
 }
 
