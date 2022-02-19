@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 
 function App() {
   const defaultValues = {
@@ -21,7 +22,6 @@ function App() {
   return (
     <Box
       sx={{
-        mt: 10,
         '& .MuiTextField-root': { m: 1, width: '50ch' },
       }}
       component="form"
@@ -35,45 +35,54 @@ function App() {
         justify="center"
         direction="column"
       >
-        <Grid item>
-          <TextField
-            id="outlined-multiline-flexible"
-            label="firstName"
-            fullWidth
-            multiline
-            maxRows={4}
-            defaultValue={defaultValues.firstName}
-            {...register('firstName')}
-          />
-        </Grid>
-        <Grid item>
-          <TextField
-            id="outlined-multiline-flexible"
-            label="lastName"
-            multiline
-            maxRows={4}
-            defaultValue={defaultValues.lastName}
-            {...register('lastName', { required: 'this is required', minLength: { value: 10, message: 'must 10' } })}
-          />
-        </Grid>
-        <Grid item align="center">
-          {errors.lastName && errors.lastName.message}
-        </Grid>
-        <Grid item>
-          <TextField
-            id="outlined-multiline-flexible"
-            label="age"
-            multiline
-            maxRows={4}
-            defaultValue={defaultValues.age}
-            {...register('age', { required: 'this is required', pattern: { value: /\d+/, message: 'pattren' } })}
-          />
-        </Grid>
-        <Grid item align="center" marginBottom={4}>
-          {errors.age && errors.age.message}
-        </Grid>
-        <Button type="submit" variant="contained">submit</Button>
+        <Paper
+          alignItems="center"
+          justify="center"
+        >
+          <h2>Form Demo</h2>
+          <Grid item>
+            <TextField
+              id="outlined-multiline-flexible"
+              label="firstName"
+              fullWidth
+              multiline
+              maxRows={4}
+              defaultValue={defaultValues.firstName}
+              {...register('firstName')}
+            />
+          </Grid>
+          <Grid item>
+            <TextField
+              id="outlined-multiline-flexible"
+              label="lastName"
+              multiline
+              maxRows={4}
+              defaultValue={defaultValues.lastName}
+              {...register('lastName', { required: 'this is required', minLength: { value: 10, message: 'must 10' } })}
+            />
+          </Grid>
+          <Grid item align="center">
+            {errors.lastName && errors.lastName.message}
+          </Grid>
+          <Grid item>
+            <TextField
+              id="outlined-multiline-flexible"
+              label="age"
+              multiline
+              maxRows={4}
+              defaultValue={defaultValues.age}
+              {...register('age', { required: 'this is required', pattern: { value: /\d+/, message: 'pattren' } })}
+            />
+          </Grid>
+          <Grid item align="center" marginBottom={4}>
+            {errors.age && errors.age.message}
+          </Grid>
+          <Grid item align="center" marginBottom={4}>
+            <Button type="submit" variant="contained">submit</Button>
+          </Grid>
+        </Paper>
       </Grid>
+
     </Box>
   );
 }
